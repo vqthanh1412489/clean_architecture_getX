@@ -18,7 +18,15 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     validateTheme();
-    validateSession();
+
+    validateSession().then((value) {
+      if (value) {
+        return Get.offNamed(AppRoutes.home);
+      }
+
+      return Get.offNamed(AppRoutes.login);
+    });
+
     super.onReady();
   }
 
@@ -32,7 +40,7 @@ class SplashController extends GetxController {
     }
   }
 
-  void validateSession() async {
+  Future<bool> validateSession() async {
     final token = await localRepositoryInterface.getToken();
 
     if (token != null) {
@@ -40,13 +48,13 @@ class SplashController extends GetxController {
         final user = await apiRepositoryInterface.getUserFromToeken(token);
         if (user is User) {
           await localRepositoryInterface.saveUser(user);
-          Get.offNamed(AppRoutes.home);
+          return true;
         }
       } on AuthException catch (_) {
-        Get.offNamed(AppRoutes.login);
+        return false;
       }
-    } else {
-      Get.offNamed(AppRoutes.login);
     }
+
+    return false;
   }
 }

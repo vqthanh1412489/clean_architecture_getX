@@ -43,8 +43,8 @@ class HomeController extends GetxController {
     return isDark;
   }
 
-  void loadUser() {
-    localRepositoryInterface.getUser().then((value) => user(value));
+  Future<void> loadUser() async {
+    user(await localRepositoryInterface.getUser());
   }
 
   Future<void> logout() async {

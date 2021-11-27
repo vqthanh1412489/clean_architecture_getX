@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:cleanarchitechgetx/domain/models/product.dart';
+import 'package:equatable/equatable.dart';
 
-class ProductCard {
+class ProductCard extends Equatable {
   ProductCard({
     required this.product,
     this.quantity = 1,
@@ -25,4 +26,7 @@ class ProductCard {
         "product": product,
         "quantity": quantity,
       };
+
+  @override
+  List<Object?> get props => [product, quantity];
 }

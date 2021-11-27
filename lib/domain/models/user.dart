@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-class User {
-  User({
+import 'package:equatable/equatable.dart';
+
+class User extends Equatable {
+  const User({
     required this.username,
     required this.name,
     required this.image,
@@ -27,5 +29,8 @@ class User {
         "image": image,
       };
 
-  factory User.empty() => User(username: '', name: '', image: '');
+  factory User.empty() => const User(username: '', name: '', image: '');
+
+  @override
+  List<Object?> get props => [username, name, image];
 }

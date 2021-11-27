@@ -59,20 +59,24 @@ class ApiRepositoryImpl extends ApiRepositoryInterface {
     await Future.delayed(const Duration(seconds: 1));
 
     final List<Product> productList = [
-      Product(
+      const Product(
           name: 'name product 1',
           pirce: 100,
           image: 'https://picsum.photos/100'),
-      Product(
+      const Product(
           name: 'name product 2',
           pirce: 200,
           image: 'https://picsum.photos/100'),
-      Product(
+      const Product(
           name: 'name product 3',
           pirce: 300,
           image: 'https://picsum.photos/100'),
     ];
 
-    return productList;
+    if (productList != null) {
+      return productList;
+    }
+
+    return [];
   }
 }

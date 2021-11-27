@@ -15,7 +15,7 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
-  void loadProducts() async {
+  Future<void> loadProducts() async {
     var result = await apiRepositoryInterface.getProducts();
 
     productList.value = result;
